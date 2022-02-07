@@ -17,9 +17,11 @@ Anubis is a simple minimalist theme for [Hugo blog engine](https://gohugo.io/).
 - Social icons
 - Google Analytics
 - Disqus
+- ISSO
 - Utteranc.es
 - RSS feeds
 - Hiding posts from the RSS feed
+- Hidden posts (available only by link)
 - Translations (en, ru, fr, pl)
 - Custom CSS/JS
 - Multilingual mode 
@@ -81,11 +83,26 @@ params:
   style: light-without-switcher
   readMore: false
   disableSummary: false
+  copyCodeButton: true # true by default
+  rssAsSocialIcon: true
   # utteranc.es support
   utterancesRepo: ""  # mandatory
   utterancesTheme: "" # optional
   utterancesIssue: "" # optional
   utterancesLabel: "" # optional
+  # isso support
+  isso:
+    enabled: true # mandatory
+    data: "https://comments.example.com/" # mandatory
+    jsLocation: "https://comments.example.com/js/embed.min.js" # mandatory
+    css: true # optional
+    lang: "de" # optional
+    replyToSelf: true # mandatory
+    requireAuthor: true # mandatory
+    requireEmail: true # mandatory
+    id: "thread-id" # optional
+    avatar: true # optional
+    avatar-bg: "#f0f0f0" # optional
   webmentions:
     url: https://yourdomain.com/webemntions/receive
     login: hugo-theme-anubis
@@ -116,9 +133,9 @@ Now enter [`localhost:1313`](http://localhost:1313/) in the address bar of your 
 ### Dark Mode
 Customize via `style` param in `params` section of config.
 Options:
-- `light-without-switcher` - light theme, without switcher, JS-free (by default)
-- `dark-without-switcher` - dark theme, without switcher, JS-free
-- `auto-without-switcher` - theme based on user system settings, without switcher, JS-free
+- `light-without-switcher` - light theme, without switcher (by default)
+- `dark-without-switcher` - dark theme, without switcher
+- `auto-without-switcher` - theme based on user system settings, without switcher
 - `light` - light theme by default, can be switched by user to dark theme and back. Theme settings are saved for user 
 - `dark` - dark theme by default, can be switched by user to light theme and back. Theme settings are saved for user 
 - `auto` - theme based on user system settings by default, can be switched by user to dark/light theme. Theme settings are saved for user (by default in example sites)
@@ -187,15 +204,22 @@ Only works for production environment.
 ### Multilingual mode 
 Check config/example usage in [exampleSiteMultilingual](https://github.com/Mitrichius/hugo-theme-anubis/tree/master/exampleSiteMultilingual) directory and documentation on [Hugo site](https://gohugo.io/content-management/multilingual/).
 
+### RSS 
+RSS is available by site url + /index.xml. Also available for specific language, section, taxonomy.  
+`rssAsSocialIcon` parameter enables rss sosial icon with link to site current language RSS.
+
 ### Robots.txt
 Based on environment.  
 For production — allow all, for other — disallow all.
 
 ### Favorite posts
-To mark posts as favorite just add `favorite: true` in post's front matter. It adds a "★" icon nearby post's title. 
+Add `favorite: true` to post front matter. It adds a "★" icon nearby post's title. 
 
 ### Hiding posts from RSS
-To hide a post from the RSS feed, just add `disable_feed: true` to its front matter.
+Add `disable_feed: true` to post front matter.
+
+### Make post available only by link
+Add `hidden: true` to post front matter. Post also is not available in RSS feed.
 
 ### Pagination on post single page
 Enabled by `paginationSinglePost` param in `params` section of config.
